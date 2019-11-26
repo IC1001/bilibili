@@ -1,0 +1,39 @@
+#first > i{
+    font-size: 1.8rem;
+    position: absolute;
+    color: #fed442;
+}
+#first > i > div{
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #d6a80d;
+    position: absolute;
+    right: 0.65rem;
+    top: 0.35rem;    
+}
+#second > i{
+    font-size: 1.8rem;
+    position: absolute;
+    color: #c0cfe2;
+}
+#second > i > div{
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #97a4b5;
+    position: absolute;
+    right: 0.65rem;
+    top: 0.35rem;    
+}
+#third > i{
+    font-size: 1.8rem;
+    position: absolute;
+    color: #d3b59d;
+}
+#third > i > div{
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #a38771;
+    position: absolute;
+    right: 0.65rem;
+    top: 0.35rem;    
+}
