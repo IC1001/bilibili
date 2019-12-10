@@ -1,15 +1,18 @@
 <template>
+<transition name="app">
 <div id="home" >
     <Header> 
-        <img src="@/assets/img/images/search.png" slot="center">
-        <input type="text" slot="center" placeholder="搜索...">
-        <img src="@/assets/img/images/iconfont/download2.png" slot="right">
-        <img src="@/assets/img/images/iconfont/news.png" slot="right">         
+        <!-- <img src="@/assets/img/images/search.png" > -->
+        <i class="el-icon-search" slot="center"></i>
+        <input type="text" slot="center" placeholder="暂时无法搜索...">
+        <img src="@/assets/img/images/iconfont/download2.png" slot="right" @click="toDownLoad">
+        <img src="@/assets/img/images/iconfont/news.png" slot="right" @click="toNews">         
     </Header>
     <Nav :titles="titles"></Nav>
     <keep-alive><router-view></router-view></keep-alive>
     <main-tab-bar></main-tab-bar>
 </div>
+</transition>
 </template>
 
 <script>
@@ -32,6 +35,14 @@ export default {
     },
     components:{
         MainTabBar,Header,Nav
+    },
+    methods:{
+        toDownLoad(){
+            this.$router.push('/DownLoad/1')
+        },
+        toNews(){
+            this.$router.push('/News')
+        }
     }
 }   
 </script>
@@ -40,7 +51,18 @@ export default {
 #home{
     height: 100%;
     background-color: white;
-    margin-top: 5rem;
+    
 }
+/* .center > input{
 
+} */
+.app-enter-active{
+    transition: all 0.6s ease;
+}
+.app-enter{
+    opacity: 0;
+}
+.disable{
+    opacity: 0.4;
+}
 </style>

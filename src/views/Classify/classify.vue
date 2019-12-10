@@ -1,11 +1,14 @@
 <template>
+<transition name="app">
 <div>
     <Header><div slot="center">频道</div></Header>
     <ChannelItem></ChannelItem>
-    <main-tab-bar></main-tab-bar>
+    
     <Part></Part>
     <ChannelRec></ChannelRec>
+    <main-tab-bar></main-tab-bar>
 </div>
+</transition>
 </template>
 
 <script>
@@ -41,6 +44,12 @@ export default {
 </script>
 
 <style>
+.app-enter-active{
+    transition: all 0.4s ease;
+}
+.app-enter{
+    opacity: 0;
 
+}
 
 </style>

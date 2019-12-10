@@ -1,14 +1,15 @@
 <template>
 <div class="waterfall">
-    <div class="wfItem" v-for="(item,index) in wfData" :key="index" @click="wfLink(index)">
+    <ul>
+    <li class="wfItem" v-for="(item,index) in wfData" :key="index" @click="wfLink(index)">
         <img :src="item.cover" >
         <!-- <div> -->
             <div class="wfTitle">{{item.title}}</div>
-            <div class="wfType">￥{{item.price}}</div>
+            <div class="wfType">{{item.price}}</div>
         <!-- </div> -->
 
-</div>
-
+    </li>
+    </ul>
 </div>
 </template>
 
@@ -16,8 +17,9 @@
 export default {
     props:['wfData'],
     methods:{
-        wfLink(){
-
+        wfLink(index){
+            this.$router.push(this.wfData[index].path)
+            // console.log(this.wfData[index]);
         }
     }
 
@@ -26,45 +28,62 @@ export default {
 
 <style>
 .waterfall{
-    /* column-count: 2;
-    column-gap: 10px; */
-    background-color:rgb(246, 246, 246);
-    display: flex;
+    column-count: 2;
+    column-gap: 0.6rem;
+    /* background-color:rgb(246, 246, 246); */
+    background-image: linear-gradient(white,#F5F5F5);
+    /* white-space: nowrap; */
+
+    /* display: flex;
     flex-wrap: wrap;
-    /* flex-direction: column; */
+    flex-direction: column; */
     /* height: 1000px;*/
     /* flex-flow:column wrap ;  */
-    padding: 1rem;
-    /* height: 500px; */
+    padding: 0.6rem;
+    /* height: 1000px; */
+   
+
     
 }
 .wfItem{
+    list-style: none;
     /* border:rgba(88, 88, 88, 0.4) solid 1px; */
-    border-radius: 0.8rem;
-    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 0.2rem;
+    /* 卡片阴影效果 */
+    box-shadow: 0px 0px 0.2rem 0.1rem rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    width: 100%;
-    /* margin:1rem; */
-    margin-bottom: 2rem;
-    height: 100%;
+    /* border-bottom: 0.5rem transparent solid; */
+    margin-bottom:0.5rem;
+    /* margin:0rem 0 0.75rem 0rem; */
+
+    /* width: 11rem; */
+    /* float: left; */
+
+    /* white-space: nowrap; */
 
     
 }
 .wfItem > img{
     width: 100%;
     height: 100%;
-    border-radius: 0.8rem 0.8rem 0rem 0rem;
+    border-radius: 0.2rem 0.2rem 0rem 0rem;
 }
 .wfTitle{
     font-weight: 600;
     font-size: .85rem;
     padding: .2rem;
+    line-height: 1rem;
+    
 
 }
 .wfType{
     color: #fa7298;
     font-weight: 500;
     padding: .2rem;
+    
+}
+.wfType::first-letter{
+    font-size: 0.8rem;
 }
 
 </style>

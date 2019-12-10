@@ -16,16 +16,15 @@
         <div class="barMid"  @click="itemClick2"><span :class="{actived1:mark===1}">评论</span></div>
         <div class="barRight">点我发送弹幕</div>
     </div>
-
 </div>
 </template>
 
 <script>
 export default {
-    name:'vedioPage',
+    name:'videoPage',
     data(){
         return{
-        mark:0,
+            mark:0,
         }
     },
     props:{
@@ -51,33 +50,43 @@ export default {
                 this.$store.state.isPlay = val
             }
         },
+        
         // 接收带index的数据源detailData
     
     },
     methods:{
         itemClick1(){
             this.mark = 0
-            this.$router.push('/detailPage/简介')
+            // this.$router.push('/detailPage/简介')
+            this.$emit('intro')
+            this.$emit('aIntro')
+            this.$emit('mIntro')
         },
         itemClick2(){
             this.mark = 1
-            this.$router.push('/detailPage/评论')
+            this.$emit('comment')
+            this.$emit('aComment')
+            this.$emit('mComment')
         },
         goback(){
             this.$router.back()
             //解决返回时路由更新但页面不更新问题
             const routeAV = ((this.$route.params.av[7] + this.$route.params.av[8]) / 1 ) 
             setTimeout(()=>{ 
-            this.$store.commit('sendData',routeAV)
-            this.$store.commit('sendAnimeData',routeAV)
+                this.$store.commit('sendData',routeAV)
+                this.$store.commit('sendAnimeData',routeAV)
             },30) 
         },
         
         playVideo(){              
-            this.$store.state.playNum++
-            localStorage.setItem('playNums',this.$store.state.playNum)
             this.isPlay = false
             this.$refs.video.play()
+            this.$store.commit('isplayed')
+            
+            this.$store.dispatch('sendHistory',this.video)
+            
+            // localStorage.setItem('playNums',this.$store.state.playNum)
+
         },
 
     },
@@ -88,7 +97,7 @@ export default {
             const routeAV = ((this.$route.params.av[7] + this.$route.params.av[8]) / 1 ) -1
             this.$store.commit('sendData',routeAV)
             this.$store.commit('sendAnimeData',routeAV)
-            this.$store.commit('useRecData',routeAV)           
+            this.$store.commit('useRecData',routeAV-12)           
         }
     },
     //   页面活跃后生成封面图与播放按钮
@@ -96,6 +105,7 @@ export default {
         document.documentElement.scrollTop = 0 ; 
         this.mark = 0;
         this.$store.state.isPlay = true;
+        
         
     },
 }
@@ -172,14 +182,15 @@ export default {
 /* .barMid{
     width: 31%;
 }
-.barRight{
-    width: 31%;
-} */
+*/
 .videoClass{
     width: 100%;
     height:13.125rem;
 }
-
+.barRight{
+    color: grey;
+    opacity: 0.5;
+} 
 
 
 </style>

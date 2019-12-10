@@ -2,12 +2,21 @@
        <!-- 点赞栏 -->
     <div class="likeBar">
         <slot></slot>
-       
+
     </div>
 </template>
 
 <script>
 export default {
+    data(){
+        return{
+
+        }
+    },
+    beforeUpdate(){
+ 
+        
+    }
 
 }
 </script>
@@ -20,6 +29,7 @@ export default {
     margin-top: 1.56rem;
     border-bottom: 1px solid rgba(120, 120, 120, 0.2);
     padding-bottom:1rem;
+    position: relative;
     
 }
 .likeBar > img {
@@ -27,6 +37,10 @@ export default {
     height: 1.875rem; */
     width: 6.5%;
     height: 6.5%;
+}
+
+.F5{
+    display: none;
 }
 
 </style>

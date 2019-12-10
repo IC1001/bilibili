@@ -1,7 +1,7 @@
 <template>
 <div class="sNav">
     <div v-for="(item,index) in sTitles" :key="index" class="sNav-item" 
-    :class="{sActived:index===0}" @click="sNavClick(index)">
+    :class="{sActived:index===sMark}" @click="sNavClick(index)">
         <router-link :to="'/shop/' + item">{{item}}</router-link>
     </div>  
 </div>
@@ -42,19 +42,12 @@ export default {
     display: flex;
     position: sticky;
     top: 2.75rem;
-    width: 23.4375rem;
-     /* padding-bottom:-0.35rem;
-    padding-top:0.3rem;   */
+    width: 100%;
     z-index: 10;
-    background-color: white;  
-    padding-bottom: 0.4rem;
-    border-bottom: rgba(0, 0, 0, 0.1) solid 1px;
-    /* justify-content: flex-start; */
-
+    background-color: white;
 }
 .sNav > .sNav-item{
     text-decoration: none;
-
     text-align: center;
     flex: 0.18;
     font-size: 0.95rem;

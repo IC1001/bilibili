@@ -1,12 +1,12 @@
 <template>
+<transition name="pageFade">
 <div class="weekHot">
-    <backBarItem class="weekBg">
-        <div>bilibili每周必看</div>
+    <backBarItem class="weekHot">
+        <div>每周必看</div>
     </backBarItem>
-    <div ></div>
-    <div class="weekBg1"></div>
-    <hotItem></hotItem>
+    <hotItem :rec="hotData"></hotItem>
 </div>
+</transition>
 </template>
 
 <script>
@@ -15,27 +15,36 @@ import hotItem from '@/components/content/DetailItem/hotItem'
 export default {
     components:{
         backBarItem,hotItem
-    }
+    },
+    computed:{
+        //使用vuex数据
+        hotData(){
+            return this.$store.state.previews
+        },
+    },
 
 }
 </script>
 
 <style>
-.weekHot{
+.weekHot,.weekHot > div {
     background-color: #fed442;
+    color: white;
 }
-.weekBg{
-    background-color: #fed442;
-    height: 2.625rem;
-    width: 23.4375rem;
-    position: fixed;
-    top: 0;
-    z-index: 9;
- 
-}
-.weekBg1{
-    height: 2.625rem;
 
+.pageFade-enter-active{
+    transition:all 0.1s ease;
+}
+.pageFade-leave-active{
+    transition:all 0.2s ease;
+}
+.pageFade-enter{
+    opacity: 0;
+    transform: scale(0.6,0.7)
+}
+.pageFade-leave-to{
+    opacity: 0;
+    transform: scale(0.6,0.7)
 }
 
 

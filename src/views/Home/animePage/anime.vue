@@ -1,20 +1,21 @@
 <template>
+<transition name="anime">
 <div>
     <SlideShow :imgArr="animeSlide"></SlideShow> 
     <classifyBar id="OLClassBar">
-        <classifyItem>
+        <classifyItem @click.native="toAnimeJPN">
         <img src="@/assets/img/images/animate_03.png" alt="" slot="classicon">
         <p slot="classtext">番剧</p>
         </classifyItem>
-        <classifyItem>
+        <classifyItem @click.native="toAnimeCN">
         <img src="@/assets/img/images/animate_06.png" alt="" slot="classicon">
         <p slot="classtext">国创</p>
         </classifyItem>
-        <classifyItem>
+        <classifyItem @click.native="toAnimeIndex">
         <img src="@/assets/img/images/animate_10.png" alt="" slot="classicon">
         <p slot="classtext">索引</p>
         </classifyItem>
-        <classifyItem>
+        <classifyItem @click.native="toAnimeHot">
         <img src="@/assets/img/images/animate_12.png" alt="" slot="classicon">
         <p slot="classtext">热门榜单</p>
         </classifyItem>
@@ -24,49 +25,41 @@
             <div slot="TBIleft">我的追番</div>
         </titleBarItem>
         <titleBarItem>
-            <span slot="TBIright" >查看全部<i class="el-icon-arrow-right" ></i></span>
+            <span slot="TBIright" @click="toMyCollect">查看全部<i class="el-icon-arrow-right" ></i></span>
         </titleBarItem>
     </titleBar>
-    <myBarItem :myData="anime"></myBarItem>
+    <myBarItem :myData="followAnime"></myBarItem>
     <titleBar>
         <titleBarItem>
-            <div slot="TBIleft">番剧推荐</div>
+            <div slot="TBIleft" >番剧推荐</div>
         </titleBarItem>
         <titleBarItem>
-            <span slot="TBIright" >查看更多<i class="el-icon-arrow-right" ></i></span>
+            <span slot="TBIright" @click="toAnimeJPN">查看更多<i class="el-icon-arrow-right" ></i></span>
         </titleBarItem>
     </titleBar>
     <DetailItem :Data="anime" ></DetailItem>
     <titleBar>
         <titleBarItem>
-            <div slot="TBIleft">番剧推荐</div>
+            <div slot="TBIleft">国创推荐</div>
         </titleBarItem>
         <titleBarItem>
-            <span slot="TBIright" >查看更多<i class="el-icon-arrow-right" ></i></span>
+            <span slot="TBIright" @click="toAnimeCN">查看更多<i class="el-icon-arrow-right" ></i></span>
         </titleBarItem>
     </titleBar> 
-    <DetailItem :Data="anime" ></DetailItem>
+    <DetailItem :Data="animeCN" ></DetailItem>
     <titleBar>
         <titleBarItem>
             <div slot="TBIleft">热门榜单</div>
         </titleBarItem>
-        <titleBarItem>
-            <span slot="TBIright" >查看更多<i class="el-icon-arrow-right" ></i></span>
-        </titleBarItem>
     </titleBar>
     <myBarItem>
         <hotList :hotData="hotAnime"></hotList>
-        <hotList :hotData="hotAnime"></hotList>
+        <hotList :hotData="hotAnimeCN">热门国创</hotList>
         
     </myBarItem>
-    <Change>查看完整榜单<i class="el-icon-arrow-right"></i></Change>
-    <div>!!!</div>
-    <div>!!!</div>
-    <div>!!!</div>
-    <div>!!!</div>
-    <div>!!!</div>
-    <div>!!!</div>
+    <Change @click.native="toAnimeHot">查看完整榜单<i class="el-icon-arrow-right"></i></Change>
 </div>
+</transition>
 </template>
 
 <script>
@@ -90,7 +83,8 @@ export default {
     name:'videoo',
     data(){
         return{
-            animeTop:0
+            animeTop:0,
+            // followAnime:this.$store.state.followAnimeArr
 
         }
     },
@@ -104,39 +98,75 @@ export default {
         },
         anime(){
             //返回前4个数据
-            return this.$store.state.anime.slice(0,4)
+            return this.$store.state.animeAll.slice(0,4)
+        },
+        animeCN(){
+            return this.$store.state.animeAll.slice(12,16)
         },
         hotAnime(){
             return this.$store.getters.hotList
+        },
+        hotAnimeCN(){
+            return this.$store.getters.hotListCN
+        },
+        followAnime(){
+            return this.$store.state.followAnimeArr
         }
+    },
+    methods:{
+        toAnimeJPN(){
+            this.$router.push('/animeJPN')
+        },
+        toAnimeCN(){
+            this.$router.push('/animeCN')
+        },
+        toAnimeHot(){
+            
+            this.$store.commit('sethlData',['热门番剧','热门国创','全部'])
+            this.$store.commit('setArankData',0)
+            this.$router.push('/hotListPage/热门番剧')
+        },
+        toAnimeIndex(){
+            
+            // this.$store.commit('sethlData',['热门番剧','热门国创','全部'])
+            // this.$store.commit('setArankData',0)
+            this.$router.push('/animeIndex')
+        },
+        toMyCollect(){
+            this.$router.push('/myCollect/1')
+        }
+    },
+	beforeCreate(){
+		this.$store.commit('setAnimeBasic')
+    },
+    beforeUpdate(){
+        // console.log(111);
     },
     activated() {
 		// this.$router.push(this.path);
-		document.documentElement.scrollTop = this.animeTop;
+        document.documentElement.scrollTop = this.animeTop;
+        
+       
 	},
   	beforeRouteLeave(to,from,next){
 		this.animeTop = document.documentElement.scrollTop ;
 		next();
 	},    
-    // activated() {
-	//     document.documentElement.scrollTop =0 ;   
-  	// },
-  	// beforeRouteLeave(to,from,next){
-  	// this.rec =  document.getElementById('rec');
-  	//   this.homeTop = window.scrollY;   
-  	// 	this.recTop = document.documentElement.scrollTop ;
-	// this.path = this.$route.path;
-	// console.log(this.recTop);
-	
-  	// 	next();
-    // },
+
 
 }
 </script>
 
 <style>
-/* #fourLimit{
-    height: 25rem;
-    overflow: hidden;
+.anime-enter-active{
+    transition: all 0.5s ease;
+}
+.anime-enter{
+	transform: translateX(-100%);
+    opacity: 0;
+}
+/* .anime-enter{
+	transform: translateX(100%);
+    opacity: 0;
 } */
 </style>

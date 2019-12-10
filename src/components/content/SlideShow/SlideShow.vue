@@ -45,7 +45,7 @@ export default {
     background-color: white;
     border-radius: 50%;
     opacity: 1;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.5rem;
 }
 .is-active .el-carousel__button {
     color: pink;
@@ -56,6 +56,9 @@ export default {
 .elimg{
     width: 22.3rem;
     height: 14.35rem;
-    border-radius: 0.5rem;
+    border-radius: 0.3rem;
+}
+.el-carousel__container{
+    border-radius: 0.3rem;   
 }
 </style>

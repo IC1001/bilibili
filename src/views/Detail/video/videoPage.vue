@@ -1,33 +1,40 @@
 <template>
+<transition name="pageZoom">
 <div>
-    <VedioCover :info="info" :video="upVideo">
-    </VedioCover>
+    <VideoCover :info="info" :video="upVideo" @intro="toIntro" @comment="toComment">
+    </VideoCover>
     <!-- 分隔页路由显示区域 -->
-    <Intro></Intro>
-    <Comment v-show="false"></Comment>
+    <Intro v-if="page"></Intro>
+    <Comment v-else></Comment>
 
    
 
 </div>
+</transition>
 </template>
 
 <script>
-import VedioCover from '@/components/content/Block/videoCover'
+import VideoCover from '@/components/content/Block/videoCover'
 import Intro from './page/intro'
 import Comment from './page/comment'
 export default {
     components:{
-        VedioCover,Intro,Comment 
+        VideoCover,Intro,Comment 
     },
-    // data(){
-    //   return{
-    //     info:
-    //     [{
-    //     portrait:require("@/assets/img/images/portrait.png"),
-    //     upname:'xiao',fansnum:'0',
-    //     isFollow:'flase'}]
-    //     }
-    // },
+    data(){
+      return{
+          page:true
+        }
+    },
+    methods:{
+        toIntro(){
+            this.page=true
+        },
+        toComment(){
+            this.page=false
+
+        }
+    },
     beforeUpdate(index){
         // this.$store.commit('sendData',index)
         
@@ -51,14 +58,19 @@ export default {
         }
 
     },
-    // activated(){
-    
-         
-    // },
+    activated(){
+        this.page = true
+    },
 
 }
 </script>
 
 <style>
-
+.pageZoom-enter-active,.pageZoom-leave-active{
+    transition:all 0.15s ease;
+}
+.pageZoom-enter,.pageZoom-leave-to{
+    opacity: 0;
+    transform: scale(0.6,0.7)
+}
 </style>

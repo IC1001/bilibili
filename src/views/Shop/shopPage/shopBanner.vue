@@ -18,15 +18,15 @@ export default {
     data(){
         return {
             bannerData:[
-                {img:require('@/assets/img/shop/banner/3.jpg'),path:''},
-                {img:require('@/assets/img/shop/banner/4.jpg'),path:''},
-                {img:require('@/assets/img/shop/banner/5.jpg'),path:''}
+                {img:require('@/assets/img/shop/banner/3.jpg'),path:'/slidePage'},
+                {img:require('@/assets/img/shop/banner/4.jpg'),path:'/slidePage'},
+                {img:require('@/assets/img/shop/banner/5.jpg'),path:'/slidePage'}
             ]
         }
     },
     methods:{
         slideLink(index){
-        this.$router.push(this.bannerData[index].path + '/' + this.bannerData[index].av);
+        this.$router.push(this.bannerData[index].path);
         // this.$store.commit('sendData',index)
         // this.$store.commit('sendAnimeData',index)
         // this.$store.commit('useRecData',index)
@@ -49,7 +49,7 @@ export default {
 .shopImg{
     width: 100%;
     height: 7rem;
-    border-radius: 0.6rem;
+    border-radius: 0.2rem;
 }
 
 

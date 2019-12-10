@@ -2,19 +2,21 @@
 <div>    
     <div class="videoTitle">
         <div class="videoInfo" >{{videoInfo.title}}</div> 
-        <div class="follow" @click="followAnime"  :class="{followed:animeFollow==1}">{{FollowText}}</div>
+        <div class="afollow" @click="followAnime" v-if="follow">♥ 追番</div>
+        <div class="afollow followed" @click="followAnime" v-else>已追番</div>
         <div class="videoData">
-            <div><i class="el-icon-video-play">0</i></div>
-            <div><i class="el-icon-postcard">0</i></div>
+            <div><i class="el-icon-video-play"></i></div>
+            <div><i class="el-icon-postcard"></i></div>
             <div><span>{{videoInfo.type}}</span></div>
             <div><span></span></div>
         </div>
     </div>
     <likeBar>
-        <img src="@/assets/img/images/likeBar-icon/like.png" alt="">
-        <img src="@/assets/img/images/likeBar-icon/download.png" alt="">
-        <img src="@/assets/img/images/likeBar-icon/comments.png" alt="">
-        <img src="@/assets/img/images/likeBar-icon/share.png" alt="">
+        <img src="@/assets/img/images/likeBar-icon/like.png"  @click="touchLike" v-if="!touch">
+        <img src="@/assets/img/images/iconfont/like2.png"  @click="touchLike" v-else>
+        <img src="@/assets/img/images/likeBar-icon/download.png">
+        <img src="@/assets/img/images/likeBar-icon/comments.png" class="disable">
+        <img src="@/assets/img/images/likeBar-icon/share.png" class="disable">
     </likeBar>
     <div class="moreRec">更多推荐</div>
 
@@ -27,8 +29,9 @@ import recItem from '@/components/content/Block/recItem'
 export default {
     data(){
         return{
-            FollowText:'♥ 追番',
+            follow: this.$store.state.animeDataAll.follow,
             animeFollow:0,
+            touch:this.$store.state.animeDataAll.touch,
         }
         
     },
@@ -42,23 +45,7 @@ export default {
             }
         }
     },
-    methods:{
-        followAnime(){            
-            if(this.animeFollow == 1){
-                localStorage.setItem("animeStatus",0)
-                this.animeFollow = 0
-                this.FollowText = '♥ 追番'  
-                this.animeNum --       
-                localStorage.setItem("animeNums",this.$store.state.animeNum)     
-            }else{
-                localStorage.setItem("animeStatus",1)
-                this.animeFollow = 1
-                this.FollowText = '已追番'
-                this.animeNum ++
-                localStorage.setItem("animeNums",this.$store.state.animeNum)
-            }
-            }
-        },
+
     computed:{
         animeNum:{
             get(){
@@ -70,28 +57,32 @@ export default {
         },
 
     },
-    activated(){
-        // console.log(this.$store.state.recData);
-        
+    methods:{
+        followAnime(){
+            this.$store.commit('isFollow') 
+            this.follow = !this.follow
+            if(this.follow == false){
+                this.$store.commit('addToFollowAnime',this.videoInfo)
+            }else{
+                this.$store.commit('deleteFollowAnime',this.$route.params.av)
+            }
+        },
+        touchLike(){
+            this.touch = !this.touch
+            this.$store.commit('isTouch')
 
+        },
     },
-    created(){
-        this.animeNum = localStorage.getItem("animeNums")
-        // this.playNum = localStorage.getItem("playNums")
-        //初始化完成时对是否关注进行判断，没有服务器数据这里借用的localStorge
-        this.isFollow = localStorage.getItem("status")
-        if(this.isFollow == 1){
-            this.FollowText = '已追番'
-        }else{
-            this.FollowText = '♥ 追番'
-        }
+    beforeUpdate(){
+        this.touch = this.$store.state.animeDataAll.touch
+        this.follow = this.$store.state.animeDataAll.follow
     },
 
 }
 </script>
 
 <style>
-.follow{
+.afollow{
     background-color: #fa7298;
     position: absolute;
     color: white;
@@ -153,5 +144,7 @@ export default {
     margin: 0.7rem;
 }
 
-
+.disable{
+    opacity: 0.4;
+}
 </style>

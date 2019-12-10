@@ -1,8 +1,9 @@
 <template>
+<transition name="app">
 <div>
     <Header>
         <div slot="center">动态</div>
-        <img src="@/assets/img/images/iconfont/show.png" slot="right">
+        <!-- <img src="@/assets/img/images/iconfont/show.png" slot="right"> -->
     </Header>
     <Nav  :titles="titles"></Nav>
     <!-- <myBarItem>
@@ -12,6 +13,7 @@
 
     <main-tab-bar></main-tab-bar>
 </div>
+</transition>
 </template>
 
 <script>
@@ -41,6 +43,12 @@ export default {
   text-align: center;
   position: relative;
   margin-top:6.125rem;
+  height: 100rem;
 }
-
+.app-enter-active{
+    transition: all 0.5s ease;
+}
+.app-enter{
+    opacity: 0;
+}
 </style>

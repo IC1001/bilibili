@@ -1,21 +1,22 @@
 <template>
-<div>
+<div>    
     <div class="recommendPage" v-for="(item,index) in rec" :key="index" @click="recLink(index)">
         <img :src="item.img" >
         <div class="recText">
             <div class="recTitle">{{item.title}}</div>
             <div class="recData">{{item.type}}</div>
             <div class="recData">
-                <i class="el-icon-video-play">0</i>
-                <i class="el-icon-star-off">0</i>
+                <i class="el-icon-video-play">{{item.playNums}}</i>
+                <i class="el-icon-postcard">0</i>
+                <span v-if="history">{{item.Date | formatDate}}</span>
             </div>
-    
         </div>
     </div>
 </div>  
 </template>
 
 <script>
+import {formatDate} from '@/common/utils.js'
 // import Bus from '../../bus.js'
 export default {
     name:'recPage',
@@ -23,9 +24,23 @@ export default {
         return{
         }
     },
+    filters:{
+        formatDate (time) {
+　　　　    let date = new Date(time) 
+            return formatDate(date, 'MM-dd hhhh:mm')
+　　    },
+    },
     computed:{
         recData(){
             return this.$store.state.recData
+        },
+        history(){
+            if(this.$route.path.indexOf('history')!==-1){
+                return true
+            }else{
+                return  false
+            }
+           
         }
     },
     props:['rec'],
@@ -34,7 +49,7 @@ export default {
             this.$router.push(this.rec[index].path + '/' + this.rec[index].av);
             
             const currentIndex = ((this.$route.params.av[7] + this.$route.params.av[8]) / 1 ) - 1
-            console.log(this.$route.params.av[7] + this.$route.params.av[8]);
+            // console.log(this.$route.params.av[7] + this.$route.params.av[8]);
             
             
             this.$store.commit('sendData',currentIndex)
@@ -46,28 +61,8 @@ export default {
             this.$store.commit('useRecData',currentIndex)
             //回到顶部
              document.documentElement.scrollTop = 0
-            // }else{
-            //    this.$store.commit('useRecData',index + 1 )
-            // }
-
-            
-            // const routeIndex = ((this.$route.params.av[7] + this.$route.params.av[8]) / 1 ) - 1
-            // this.rec.splice(2,1)
         }
     },
-
-    // updated(){
-    //     if(this.$route.params.av ){
-    //         //传入路由params值的后两位当索引
-    //         // const routeAV = ((this.$route.params.av[7] + this.$route.params.av[8]) / 1 ) -1
-    //         // this.$store.commit('sendData',routeAV)
-    //         const currentIndex = ((this.$route.params.av[7] + this.$route.params.av[8]) / 1 ) - 1
-    //         this.$store.commit('useRecData',currentIndex)
-    //     }
-      
-       
-
-    
 
 }
 </script>
@@ -94,14 +89,15 @@ export default {
 
 }
 .recData{
-    color: cadetblue;
+    color: #9C9C9C	;
     font-size: 0.8rem;
     margin-top: 1rem;
 
 }
-.recData > i,i{
+.recData > i{
     font-size: 1rem;
-    margin-right: 0.3rem;
+    margin-right: 0.9rem;
+
 
 }
 .recText{

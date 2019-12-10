@@ -21,7 +21,8 @@ export default {
 
 }
 .TBIleft{
-    font-size: 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
 
 }
 .TBIright{

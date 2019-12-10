@@ -1,10 +1,11 @@
 <!--推荐页详情列表-->
 <template>
+
 <div class="detail">
     <div class="dtItem" v-for="(item,index) in Data" :key="index" @click="dtLink(index)">
-        <img :src="item.img" >
-        <div>
-            <div class="dtTitle">{{item.title}}</div>
+        <img v-if="item" :src="item.img" >
+        <div v-if="item">
+            <div class="dtTitle" >{{item.title}}</div>
             <div class="dtType">{{item.type}}</div>
         </div>
     </div>
@@ -22,10 +23,11 @@ export default {
     },
     methods:{
         dtLink(index){
+            const routeIndex = (this.Data[index].av[7] + this.Data[index].av[8]) / 1 -1            
             this.$router.push(this.Data[index].path + '/' + this.Data[index].av)
             // this.$router.push(this.Data[index].path + '/' + this.Data[index].av);this.$route.params.uid
-            this.$store.commit('sendData',index)
-            this.$store.commit('sendAnimeData',index)
+            this.$store.commit('sendData',routeIndex)
+            this.$store.commit('sendAnimeData',routeIndex)
             this.$store.commit('useRecData',index)
         }
     },
@@ -37,8 +39,9 @@ export default {
 <style>
 .detail{
     height: 100%;
+    margin-top: -0.75rem;
     text-align: center;
-    padding:1%;
+    padding:1rem 0.6rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -46,9 +49,12 @@ export default {
 .detail > .dtItem{
     height: 10.55rem;
     width: 10.695rem;
-    margin-top: 0.375rem;
+    margin: 0.3rem 0;
     background-color: white;
     border-radius: 6%;
+        /* 卡片阴影效果 */
+    box-shadow: 0px 0px 0.1rem 0.05rem rgba(0, 0, 0, 0.1);
+    /* border-bottom: 1px solid rgba(100, 100, 100, 0.3); */
 
 }
 .detail > .dtItem > img{    

@@ -1,7 +1,7 @@
 <template>
 <div>
     <!-- 视频信息栏 -->
-    <upInfo  v-for="(item,index) in info" :key="index" :upinfo="item"></upInfo>
+    <upInfo  :upinfo="info"></upInfo>
     <recItem :rec="previews"></recItem>
 </div>
 </template>
@@ -20,7 +20,7 @@ export default {
     },
     computed:{
         info(){
-            return this.$store.state.info
+            return this.$store.state.detailData
         },
         previews(index){
             return this.$store.state.previews

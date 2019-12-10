@@ -15,9 +15,10 @@ export default {
     props:['verData'],
     methods:{
         vtLink(index){
+            const routeIndex = (this.verData[index].av[7] + this.verData[index].av[8]) / 1 -1 
             this.$router.push(this.verData[index].path + '/' + this.verData[index].av)
             this.$store.commit('useRecData',index)
-            this.$store.commit('sendData',index)            
+            this.$store.commit('sendData',routeIndex)            
         }
     },
 

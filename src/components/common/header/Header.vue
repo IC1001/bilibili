@@ -1,17 +1,25 @@
 <template>
-<div class="header">
-    <div class="left">
-        <img src="@/assets/img/images/haha.png">
-        <img src="@/assets/img/images/iconfont/admin.png">
+<div>
+    <div class="header">
+        <div class="left" @click="openMine">
+            <img src="@/assets/img/images/haha.png">
+            <img src="@/assets/img/images/iconfont/admin.png">
+        </div>
+        <div class="center"><slot name="center"></slot></div>
+        <div class="right"><slot name="right"></slot></div> 
     </div>
-    <div class="center"><slot name="center"></slot></div>
-    <div class="right"><slot name="right"></slot></div> 
+    <div class="headerBottom"></div>
 </div>
 </template>
 
 <script>
 export default {
-    name:"Header"
+    name:"Header",
+    methods:{
+        openMine(){
+            this.$store.commit('switchMine')
+        }
+    }
 }
 </script>
 
@@ -24,6 +32,10 @@ export default {
     z-index: 10;
     position: fixed;
     top: 0;
+
+}
+.headerBottom{
+    height: 3rem;
 }
 .header > .left > img{
     height: 2rem;
@@ -58,12 +70,14 @@ export default {
     font-size: 1.125rem;
     line-height: 2.75rem;
 }
-.center > img{
+.center > i{
     height: 1rem;
+    line-height: 1rem;
     width: auto;
     position: absolute;
     top:1rem;
     left: 0.725rem;
+    opacity: 0.4;
 }
 .center > input{
     border-radius: 18px;
@@ -82,6 +96,6 @@ export default {
     width: 20%;
     position: relative;
     display: flex;
-        justify-content: space-around;
+    justify-content: space-around;
 }
 </style>

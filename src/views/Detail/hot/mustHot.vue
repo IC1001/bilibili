@@ -1,12 +1,12 @@
 <template>
+<transition name="pageFade">
 <div class="mustHot">
-    <backBarItem >
+    <backBarItem class="mustHot">
         <div>入站必看</div>
     </backBarItem>
-    <div class="mustBg"></div>
-    <div class="mustBg1"></div>
-    <hotItem></hotItem>
+    <hotItem :rec="hotData"></hotItem>
   </div>
+</transition>
 </template>
 
 <script>
@@ -16,26 +16,36 @@ import hotItem from '@/components/content/DetailItem/hotItem'
 export default {
     components:{
         backBarItem,hotItem
-    }
+    },
+    computed:{
+        //使用vuex数据
+        hotData(){
+            return this.$store.state.previews
+        },
+    },
 }
 </script>
 
 <style>
-.mustHot{
+.mustHot,.mustHot > div{
     background-color: #f3921f;
+    color: white;
 }
-.mustBg{
-    background-color: #f3921f;
-    height: 2.625rem;
-    width: 23.4375rem;
-    position: fixed;
-    top: 0;
-    z-index: 9;
- 
-}
-.mustBg1{
-    height: 2.625rem;
 
+.pageFade-enter-active{
+    transition:all 0.5s ease;
 }
+.pageFade-leave-active{
+    transition:all 0.15s ease;
+}
+.pageFade-enter{
+     opacity: 0;
+    /* transform: scale(0.6,0.95) */
+}
+.pageFade-leave-to{
+    opacity: 0;
+    transform: scale(0.6,0.95)
+}
+
 
 </style>

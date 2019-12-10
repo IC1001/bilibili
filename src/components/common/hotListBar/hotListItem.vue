@@ -28,8 +28,6 @@ export default {
 <style>
 @import url('../../../assets/css/123.css');
 .hotListItem{
-
-
     position: relative;
     /* height: 6rem; */
     /* line-height: 5rem; */

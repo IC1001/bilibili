@@ -1,4 +1,5 @@
 <template>
+<div>
 <div class="mainTB">
     <!-- 底部栏路由图片文字修改处 -->
     <tab-bar class="mainTB">
@@ -23,6 +24,9 @@
             <div>会员购</div>
         </tab-bar-item>
     </tab-bar>
+    
+</div>
+<div class="TabBarBottom"></div>
 </div>
 </template>
 
@@ -40,6 +44,18 @@ export default {
 <style>
 .mainTB{
     position: fixed;
-    z-index: 10;
+    bottom: 0;
+    z-index: 9;
+    width: 100%;
+    height: 3.19rem;
+
+}
+.TabBarBottom{
+    position: fixed;
+    bottom: 0;
+    height: 3.3rem;
+    width: 23.4375rem;
+    background: rgb(246, 246, 246)	;
+
 }
 </style>

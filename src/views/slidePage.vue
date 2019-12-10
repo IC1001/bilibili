@@ -2,15 +2,20 @@
   <div>
       <span class="slideBack" @click="slideBack"><i class="el-icon-back"></i></span>
       <img src="@/assets/img/slide/slidepage.jpg" alt="" class="imgg">
+      <Kong>这是假的广告页</Kong>
   </div>
 </template>
 
 <script>
+import Kong from '@/components/content/Block/kong'
 export default {
     methods:{
         slideBack(){
             this.$router.back()
         }
+    },
+    components:{
+        Kong
     }
 
 }
@@ -27,6 +32,7 @@ export default {
 .imgg{
     margin: 0 0 0 0;
     width: 100%;
+    height: 30rem;
 }
 
 </style>

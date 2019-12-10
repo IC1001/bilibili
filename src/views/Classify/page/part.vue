@@ -9,32 +9,34 @@
             <span slot="TBIright" @click="ufPart" v-show="!ufStatus">展开分区<i class="el-icon-arrow-down" ></i></span>
         </titleBarItem>
     </titleBar>
+    <el-collapse-transition>
     <div v-show="ufStatus">
         <classifyBar>
-            <classifyItem v-for="(item,index) in channelArr1" :key="index">
+            <classifyItem v-for="(item,index) in channelArr1" :key="index" @click.native="toPartPage(index)">
                 <img :src="item.img" slot="classicon">
                 <p slot="classtext">{{item.title}}</p>
             </classifyItem>
         </classifyBar>
         <classifyBar>
-            <classifyItem v-for="(item,index) in channelArr2" :key="index">
+            <classifyItem v-for="(item,index) in channelArr2" :key="index" @click.native="toPartPage(index+4)">
                 <img :src="item.img" slot="classicon">
                 <p slot="classtext">{{item.title}}</p>
             </classifyItem>
         </classifyBar>
         <classifyBar>
-            <classifyItem v-for="(item,index) in channelArr3" :key="index">
+            <classifyItem v-for="(item,index) in channelArr3" :key="index" @click.native="toPartPage(index+8)">
                 <img :src="item.img" slot="classicon">
                 <p slot="classtext">{{item.title}}</p>
             </classifyItem>
         </classifyBar>
         <classifyBar>
-            <classifyItem v-for="(item,index) in channelArr4" :key="index">
+            <classifyItem v-for="(item,index) in channelArr4" :key="index" @click.native="toPartPage(index+12)">
                 <img :src="item.img" slot="classicon">
                 <p slot="classtext">{{item.title}}</p>
             </classifyItem>
         </classifyBar>   
-    </div>     
+    </div>
+    </el-collapse-transition>     
 </div>
 </template>
 
@@ -53,28 +55,28 @@ export default {
         return{
             ufStatus:true,
             channelArr1:[
-                {img:require("@/assets/img/classify/images/classify_03.png"),path:'/TV',title:'番剧'},
-                {img:require("@/assets/img/classify/images/classify_05.png"),path:'/TV',title:'国创'},
-                {img:require("@/assets/img/classify/images/classify_07.png"),path:'/TV',title:'放映厅'},
-                {img:require("@/assets/img/classify/images/classify_17.png"),path:'/TV',title:'直播'},
+                {img:require("@/assets/img/classify/images/classify_03.png"),path:'/animeJPN',title:'番剧'},
+                {img:require("@/assets/img/classify/images/classify_05.png"),path:'/animeCN',title:'国创'},
+                {img:require("@/assets/img/classify/images/classify_07.png"),path:'/movie/推荐',title:'放映厅'},
+                {img:require("@/assets/img/classify/images/classify_17.png"),path:'/partPage/户外',title:'户外'},
             ],
             channelArr2:[
-                {img:require("@/assets/img/classify/images/classify_34.png"),path:'/TV',title:'科技'},
-                {img:require("@/assets/img/classify/images/classify_24.png"),path:'/TV',title:'音乐'},
-                {img:require("@/assets/img/classify/images/classify_26.png"),path:'/TV',title:'舞蹈'},
-                {img:require("@/assets/img/classify/images/classify_28.png"),path:'/TV',title:'游戏'},
+                {img:require("@/assets/img/classify/images/classify_34.png"),path:'/partPage/科技',title:'科技'},
+                {img:require("@/assets/img/classify/images/classify_24.png"),path:'/partPage/音乐',title:'音乐'},
+                {img:require("@/assets/img/classify/images/classify_26.png"),path:'/partPage/舞蹈',title:'舞蹈'},
+                {img:require("@/assets/img/classify/images/classify_28.png"),path:'/partPage/游戏',title:'游戏'},
             ],
             channelArr3:[
-                {img:require("@/assets/img/classify/images/classify_43.png"),path:'/TV',title:'鬼畜'},
-                {img:require("@/assets/img/classify/images/classify_44.png"),path:'/TV',title:'时尚'},
-                {img:require("@/assets/img/classify/images/classify_36.png"),path:'/TV',title:'生活'},
-                {img:require("@/assets/img/classify/images/classify_38.png"),path:'/TV',title:'VLOG'},
+                {img:require("@/assets/img/classify/images/classify_43.png"),path:'/partPage/鬼畜',title:'鬼畜'},
+                {img:require("@/assets/img/classify/images/classify_44.png"),path:'/partPage/时尚',title:'时尚'},
+                {img:require("@/assets/img/classify/images/classify_36.png"),path:'/partPage/生活',title:'生活'},
+                {img:require("@/assets/img/classify/images/classify_38.png"),path:'/partPage/VLOG',title:'VLOG'},
             ],
             channelArr4:[
-                {img:require("@/assets/img/classify/images/classify_18.png"),path:'/TV',title:'学习'},
-                {img:require("@/assets/img/classify/images/classify_52.png"),path:'/TV',title:'电影'},
-                {img:require("@/assets/img/classify/images/classify_53.png"),path:'/TV',title:'电视剧'},
-                {img:require("@/assets/img/classify/images/classify_09.png"),path:'/TV',title:'纪录片'},
+                {img:require("@/assets/img/classify/images/classify_18.png"),path:'/partPage/学习',title:'学习'},
+                {img:require("@/assets/img/classify/images/classify_52.png"),path:'/movie/电影',title:'电影'},
+                {img:require("@/assets/img/classify/images/classify_53.png"),path:'/movie/电视剧',title:'电视剧'},
+                {img:require("@/assets/img/classify/images/classify_09.png"),path:'/movie/纪录片',title:'纪录片'},
             ]
 
         }
@@ -84,6 +86,10 @@ export default {
             this.ufStatus = ! this.ufStatus
 
 
+        },
+        toPartPage(index){
+            const channelArr = this.channelArr1.concat(this.channelArr2).concat(this.channelArr3).concat(this.channelArr4)
+            this.$router.push(channelArr[index].path)
         }    
     }
 

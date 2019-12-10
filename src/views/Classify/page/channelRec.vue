@@ -5,54 +5,42 @@
         <titleBarItem class="xx">
             <div slot="TBIleft" class="xx">搞笑</div>
         </titleBarItem>
-        <titleBarItem>
-            <span slot="TBIright" >查看更多<i class="el-icon-arrow-right" ></i></span>
-        </titleBarItem>
+
     </titleBar> 
     <DetailItem :Data="video" ></DetailItem>
     <titleBar >
         <titleBarItem>
             <div slot="TBIleft">英雄联盟</div>
         </titleBarItem>
-        <titleBarItem>
-            <span slot="TBIright" >查看更多<i class="el-icon-arrow-right" ></i></span>
-        </titleBarItem>
+
     </titleBar> 
     <DetailItem :Data="video" ></DetailItem>
     <titleBar >
         <titleBarItem>
             <div slot="TBIleft">互动视频</div>
         </titleBarItem>
-        <titleBarItem>
-            <span slot="TBIright" >查看更多<i class="el-icon-arrow-right" ></i></span>
-        </titleBarItem>
+
     </titleBar> 
     <DetailItem :Data="video" ></DetailItem>
     <titleBar >
         <titleBarItem>
             <div slot="TBIleft">鬼畜</div>
         </titleBarItem>
-        <titleBarItem>
-            <span slot="TBIright" >查看更多<i class="el-icon-arrow-right" ></i></span>
-        </titleBarItem>
+
     </titleBar> 
     <DetailItem :Data="video" ></DetailItem>
     <titleBar >
         <titleBarItem>
             <div slot="TBIleft">喵星人</div>
         </titleBarItem>
-        <titleBarItem>
-            <span slot="TBIright" >查看更多<i class="el-icon-arrow-right" ></i></span>
-        </titleBarItem>
+
     </titleBar> 
     <DetailItem :Data="video" ></DetailItem>
     <titleBar >
         <titleBarItem>
             <div slot="TBIleft">数据可视化</div>
         </titleBarItem>
-        <titleBarItem>
-            <span slot="TBIright" >查看更多<i class="el-icon-arrow-right" ></i></span>
-        </titleBarItem>
+
     </titleBar> 
     <DetailItem :Data="video" ></DetailItem>               
 </div>

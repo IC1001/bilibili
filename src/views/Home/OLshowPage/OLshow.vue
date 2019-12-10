@@ -1,4 +1,5 @@
 <template>
+<transition name="OL">
 <div class="OLbg">   
     <div  @click="OLtips"><SlideOL :imgArr="imgArr"></SlideOL></div>
         <classifyBar id="OLClassBar">
@@ -57,6 +58,7 @@
     <div v-show="isAlert" class="alertShade"> 
     暂无直播</div>
 </div>
+</transition>
 </template>
 
 <script>
@@ -123,6 +125,7 @@ export default {
 .OLtips{
   text-align: center;
   position: relative;
+  margin-bottom: 10rem;
   /* top: 50px; */
 }
 
@@ -148,4 +151,14 @@ export default {
   width: 100%;
   height: 100%;
 } */
+.OL-enter-active,.OL-leave-active{
+    transition: all 0.5s ease; 
+}
+
+.OL-leave-to{
+    transform: translateX(-375px);
+}
+.OL-enter{
+    transform: translateX(-100%);
+}
 </style>
