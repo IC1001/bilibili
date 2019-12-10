@@ -26,6 +26,7 @@
             <div v-for="(item,index) in linkArr" :key="index" @click="toMineLinke(index)" :class="{IndexColor:mineIndex == index}">
                 <i :class="item.class"></i>{{item.title}}
             </div>
+            
             <!-- <div class="IndexColor"><i class="el-icon-s-home"></i>首页</div>
             <div @click="toHistory"><i class="el-icon-time" ></i>历史记录</div>
             <div @click="toDownLoad"><i class="el-icon-folder-checked"></i>下载管理</div>
