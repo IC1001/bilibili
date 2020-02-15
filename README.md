@@ -1,6 +1,6 @@
-# vue-euv
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-利用vue模仿B站APP项目，做的还不够好，未来会继续改善 ——12.10 肖星
+仿bilibili手机端APP页面（静态项目）
+###
+ cd vue-euv
+ npm run serve
+###
+技术栈：vue（vuex、vue-router）+ elementUI
